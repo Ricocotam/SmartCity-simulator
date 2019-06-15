@@ -2,23 +2,23 @@
 
 This module is used to compute different scores once the simulation is done.
 """
-import torch
+
+def compute_scores(people, energies, lights, heatings):
+    spent = spendings(energies)
+    pollutes = pollution(energies)
+    satisfied = satisfaction(people, energies, lights, heatings)
+    
+    return {"spendings": spent,
+            "pollution": pollutes,
+            "happiness": satisfied}
+
 
 def pollution(energies):
-    score = 0
-    total_quantity = 0
-    for energy in energies:
-        total_quantity += energy.quantity
-        score += energy.pollution_factor * energy.quantity
-    score /= total_quantity
-
+    score = (energies.pollution_factors * energies.amounts).mean()
     return score
 
 
-def satisfaction(citizens,  # shape : nb_citizens, nb_opinions , mean, std
-                 preferences,  # shape : nb_citizens, nb_opinions
-                ):
-    return 1
+def satisfaction(people, energies, lights, heatings):
     """
     # shape : nb_citizens, nb_opinions
     #log_probas = ...
@@ -29,7 +29,8 @@ def satisfaction(citizens,  # shape : nb_citizens, nb_opinions , mean, std
 
     return city_satisfaction
     """
+    return 1
 
 
 def spendings(energies):
-    return sum(map(lambda e: e.amount, energies))
+    return sum(map(lambda e: e.amount * e.cost, energies))
