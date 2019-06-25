@@ -19,7 +19,7 @@ class Simulator:
 #        self.lights_step()
 #        self.heatings_step()
         self.energies_step()
-        self.transports_step()
+        #self.transports_step()
         return scores
     
     def lights_step(self):
@@ -37,3 +37,13 @@ class Simulator:
 
     def transports_step(self):
         pass
+    
+    def light_up(self, lights_on):
+        pass
+    
+    def heat_up(self, heats, temperatures):
+        pass
+    
+    def buy_energies(self, energies, amounts):
+        cost = self.energies.buy(amounts)
+        return cost
