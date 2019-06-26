@@ -1,5 +1,3 @@
-
-
 def buil_all(configs):
     energies = build_energies(configs["energies"])
     people = build_people(configs["people"])
@@ -35,3 +33,6 @@ def build_lights(config):
 def build_heaters(config):
     raise NotImplementedError
 
+
+if __name__ == '__main__':
+    pass

@@ -1,9 +1,10 @@
-"""Simulation functions.
+""" Simulation functions.
 
 This module contains all simulation functions for the entire city.
 Those are called at each tick with the previous one.
 """
 from scores import compute_scores
+
 
 class Simulator:
     def __init__(self, energies, transports, lights, heatings, people):
@@ -15,13 +16,12 @@ class Simulator:
 
     def step(self):
         scores = compute_scores(self.people, self.energies, self.lights, self.heatings)
-
-#        self.lights_step()
-#        self.heatings_step()
+        # self.lights_step()
+        # self.heatings_step()
         self.energies_step()
-        #self.transports_step()
+        # self.transports_step()
         return scores
-    
+
     def lights_step(self):
         pass
 
@@ -37,13 +37,17 @@ class Simulator:
 
     def transports_step(self):
         pass
-    
+
     def light_up(self, lights_on):
         pass
-    
+
     def heat_up(self, heats, temperatures):
         pass
-    
+
     def buy_energies(self, energies, amounts):
         cost = self.energies.buy(amounts)
         return cost
+
+
+if __name__ == '__main__':
+    pass
