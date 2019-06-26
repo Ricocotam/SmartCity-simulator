@@ -1,32 +1,24 @@
-""" Simulation functions.
-
-This module contains all simulation functions for the entire city.
-Those are called at each tick with the previous one.
+""" This module contains all simulation functions for the entire city. Those
+are called at each tick.
 """
-from scores import compute_scores
+from .scores import compute_scores
 
 
-class Simulator:
-    def __init__(self, energies, transports, lights, heatings, people):
+class SmartCity:
+    def __init__(self, people, energies, transports, lights, heatings):
+        self.people = people
         self.energies = energies
         self.transports = transports
         self.lights = lights
         self.heatings = heatings
-        self.people = people
 
     def step(self):
-        scores = compute_scores(self.people, self.energies, self.lights, self.heatings)
+        scores = compute_scores(people=self.people, energies=self.energies,
+                                lights=self.lights, heatings=self.heatings)
+        self.energies_step()
         # self.lights_step()
         # self.heatings_step()
-        self.energies_step()
-        # self.transports_step()
         return scores
-
-    def lights_step(self):
-        pass
-
-    def heatings_step(self):
-        pass
 
     def energies_step(self):
         cost_factors = self.energies.sample_cost_factors()
@@ -35,7 +27,10 @@ class Simulator:
         self.energies.costs *= cost_factors
         self.energies.amounts *= amount_factors
 
-    def transports_step(self):
+    def lights_step(self):
+        pass
+
+    def heatings_step(self):
         pass
 
     def light_up(self, lights_on):
