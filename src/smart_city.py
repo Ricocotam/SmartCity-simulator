@@ -12,11 +12,14 @@ class SmartCity:
         self.heatings = heatings
 
     def step(self):
+        """ Compute (and returns) the score for the current step, then update
+        the city's data to the next step.
+        """
         scores = compute_scores(people=self.people, energies=self.energies,
                                 lights=self.lights, heatings=self.heatings)
         self.energies_step()
-        # self.lights_step()
-        # self.heatings_step()
+        self.lights_step()
+        self.heatings_step()
         return scores
 
     def energies_step(self):

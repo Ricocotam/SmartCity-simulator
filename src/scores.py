@@ -20,8 +20,7 @@ def compute_scores(people, energies, lights, heatings):
 
 
 def pollution(energies):
-    score = (energies.pollution_factors * energies.amounts).mean()
-    return score
+    return (energies.pollution_factors * energies.amounts).mean()
 
 
 def satisfaction(people, lights, heatings):
