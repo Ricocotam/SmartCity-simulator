@@ -5,10 +5,9 @@ from .scores import compute_scores
 
 
 class SmartCity:
-    def __init__(self, people, energies, transports, lights, heatings):
+    def __init__(self, people, energies, lights, heatings):
         self.people = people
         self.energies = energies
-        self.transports = transports
         self.lights = lights
         self.heatings = heatings
 
