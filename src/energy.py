@@ -20,5 +20,8 @@ class Energies:
         pass
 
 
+def identity_sample(x):
+    return x
+
 if __name__ == '__main__':
     pass
