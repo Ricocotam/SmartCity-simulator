@@ -1,6 +1,7 @@
 import numpy as np
 
-from energy import Energies, identity_sample
+from .energy import Energies, identity_sample
+
 
 def buil_all(configs):
     energies = build_energies(configs["energies"])
@@ -25,13 +26,12 @@ def build_energies(config):
     sampler_amount_factors = identity_sample
 
     return Energies(
-        initial_costs = costs,
-        initial_amounts = amounts,
-        pollution_factors = pollution_factors,
-        sampler_cost_factors = sampler_cost_factors,
-        sampler_amount_factors = sampler_amount_factors
+        initial_costs=costs,
+        initial_amounts=amounts,
+        pollution_factors=pollution_factors,
+        sampler_cost_factors=sampler_cost_factors,
+        sampler_amount_factors=sampler_amount_factors
     )
-    
 
 
 def build_people(config):
