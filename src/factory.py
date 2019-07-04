@@ -1,6 +1,6 @@
 import numpy as np
 
-from energy import Energies, identity_sample
+from .energy import Energies, identity_sample
 
 def buil_all(configs):
     energies = build_energies(configs["energies"])

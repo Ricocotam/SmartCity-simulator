@@ -5,21 +5,21 @@ from .scores import compute_scores
 
 
 class SmartCity:
-    def __init__(self, people, energies, lights, heatings):
+    def __init__(self, people, energies, lights, heaters):
         self.people = people
         self.energies = energies
         self.lights = lights
-        self.heatings = heatings
+        self.heaters = heaters
 
     def step(self):
         """ Compute (and returns) the score for the current step, then update
         the city's data to the next step.
         """
         scores = compute_scores(people=self.people, energies=self.energies,
-                                lights=self.lights, heatings=self.heatings)
+                                lights=self.lights, heaters=self.heaters)
         self.energies_step()
         self.lights_step()
-        self.heatings_step()
+        self.heaters_step()
         return scores
 
     def energies_step(self):
@@ -32,7 +32,7 @@ class SmartCity:
     def lights_step(self):
         pass
 
-    def heatings_step(self):
+    def heaters_step(self):
         pass
 
     def light_up(self, lights_on):
