@@ -27,9 +27,15 @@ def main():
                     }
             ]
         },
-        "people": {},
+        "people": {
+            "nb_people": 500,
+            "pollution_pref": {"distribution_name": "uniform", "low": 0., "high": 0.5},
+            "nuclear_pref": {"distribution_name": "uniform", "low": 0.2, "high": 1.0},
+            "lights_pref": "random",
+            "heat_pref": "random"
+        },
         "lights": 5_000,
-        "heaters": 3_000
+        "heaters": 800
     }
 
     data = build_all(configs)
