@@ -31,16 +31,16 @@ def main():
             "nb_people": 500,
             "pollution_pref": {"distribution_name": "uniform", "low": 0., "high": 0.5},
             "nuclear_pref": {"distribution_name": "uniform", "low": 0.2, "high": 1.0},
-            "lights_pref": "random",
-            "heat_pref": "random"
+            "lights_pref": {"distribution_name": "uniform", "low": 0., "high": 0.5},
+            "heat_pref": {"distribution_name": "uniform", "low": 0.2, "high": 1.0},
+            "interraction": "random"
         },
-        "lights": 5_000,
-        "heaters": 800
+        "lights": {"nb_lights": 5_000},
+        "heaters": {"nb_heaters": 800, "mean_temperature": 18, "std_temperature": 1}
     }
 
     data = build_all(configs)
-    local_vars = locals()
-    local_vars = {**local_vars, **configs}
+    people, energies, lights, heaters = [data[k] for k in ["people", "energies", "lights", "heaters"]]
     smart_city = SmartCity(people=people, energies=energies,
                            lights=lights, heaters=heaters)
     engine = Engine(smart_city)

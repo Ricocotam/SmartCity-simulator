@@ -3,9 +3,9 @@ import numpy as np
 from .energy import Energies, identity_sample
 from .people import People
 
-def buil_all(configs):
+def build_all(configs):
     energies = build_energies(configs["energies"])
-    people = build_people(configs["people"], configs["nb_lights"], configs["nb_heaters"])
+    people = build_people(configs["people"], configs["lights"]["nb_lights"], configs["heaters"]["nb_heaters"])
     lights = build_lights(configs["lights"])
     heaters = build_heaters(configs["heaters"])
 
