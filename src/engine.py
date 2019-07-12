@@ -17,7 +17,7 @@ class Engine:
         self.smart_city.heat_up(heats, temperatures)
 
     def buy_energies(self, amounts):
-        self.smart_city.buy(amounts)
+        self.smart_city.buy_energies(amounts)
 
     def step(self):
         step_scores = self.smart_city.step()

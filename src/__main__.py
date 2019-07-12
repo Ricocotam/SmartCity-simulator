@@ -1,6 +1,6 @@
-from .smart_city import SmartCity
 from .engine import Engine
 from .factory import build_all
+from .smart_city import SmartCity
 
 
 def main():
@@ -44,6 +44,12 @@ def main():
     smart_city = SmartCity(people=people, energies=energies,
                            lights=lights, heaters=heaters)
     engine = Engine(smart_city)
+    engine.buy_energies(smart_city.energies.amounts / 2)
+    engine.step()
+    print(engine.scores, "\n", smart_city.energies)
+    engine.buy_energies(smart_city.energies.amounts / 2)
+    engine.step()
+    print(engine.scores, "\n", smart_city.energies)
 
 
 if __name__ == '__main__':

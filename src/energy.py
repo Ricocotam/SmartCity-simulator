@@ -1,27 +1,30 @@
+import numpy as np
+
+
 class Energies:
     def __init__(self, initial_costs, initial_amounts, pollution_factors,
-                 sampler_cost_factors, sampler_amount_factors):
+                 new_cost, new_amount):
         self.costs = initial_costs
         self.amounts = initial_amounts
         self.pollution_factors = pollution_factors
 
-        self.sampler_cost_factors = sampler_cost_factors
-        self.sampler_amount_factors = sampler_amount_factors
+        self.bought_amounts = np.zeros_like(self.amounts)
+
+        self.new_cost = new_cost
+        self.new_amount = new_amount
 
     def __str__(self):
-        pass
+        return f"Energies :\n\tcosts {self.costs}\n\tamounts {self.amounts}\n\tpollution {self.pollution_factors}"
 
     def buy(self, amounts):
-        assert all(map(lambda e, a: e >= a, zip(self.amounts, amounts)))
+        assert all(map(lambda e, a: e >= a, self.amounts, amounts))
 
-        self.amounts -= amounts
+        self.bought_amounts = amounts
 
     def to_json(self):
         pass
 
 
-def identity_sample(x):
-    return x
 
 if __name__ == '__main__':
     pass

@@ -11,16 +11,16 @@ The city is evaluated wrt the following criteria :
 """
 
 
-def compute_scores(people, energies, lights, heatings):
+def compute_scores(people, energies, lights, heaters):
     return {
         "spendings": spendings(energies),
         "pollution": pollution(energies),
-        "happiness": satisfaction(people, lights, heatings)
+        "happiness": satisfaction(people, lights, heaters)
     }
 
 
 def pollution(energies):
-    return (energies.pollution_factors * energies.amounts).mean()
+    return (energies.pollution_factors * energies.bought_amounts).mean()
 
 
 def satisfaction(people, lights, heatings):
@@ -38,7 +38,7 @@ def satisfaction(people, lights, heatings):
 
 
 def spendings(energies):
-    return sum(map(lambda energy: energy.amount * energy.cost, energies))
+    return (energies.bought_amounts * energies.costs).sum()
 
 
 if __name__ == '__main__':

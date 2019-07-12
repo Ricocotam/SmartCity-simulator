@@ -1,6 +1,6 @@
 import numpy as np
 
-from .energy import Energies, identity_sample
+from .energy import Energies
 from .people import People
 
 def build_all(configs):
@@ -18,19 +18,19 @@ def build_all(configs):
 
 
 def build_energies(config):
-    costs = [e["cost"] for e in config["energies"]]
-    amounts = [e["amount"] for e in config["energies"]]
-    pollution_factors = [e["pollution_factor"] for e in config["energies"]]
+    costs = np.array([e["cost"] for e in config["energies"]], dtype=np.float64)
+    amounts = np.array([e["amount"] for e in config["energies"]], dtype=np.float64)
+    pollution_factors = np.array([e["pollution_factor"] for e in config["energies"]], dtype=np.float64)
 
-    sampler_cost_factors = identity_sample
-    sampler_amount_factors = identity_sample
+    new_cost = lambda x: x
+    new_amount = lambda x: 1.3 * x
 
     return Energies(
         initial_costs=costs,
         initial_amounts=amounts,
         pollution_factors=pollution_factors,
-        sampler_cost_factors=sampler_cost_factors,
-        sampler_amount_factors=sampler_amount_factors
+        new_cost=new_cost,
+        new_amount=new_amount
     )
 
 
