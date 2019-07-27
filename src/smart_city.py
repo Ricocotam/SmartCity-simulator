@@ -18,32 +18,26 @@ class SmartCity:
         self.heaters = heaters
 
         self.needded_energy = 50
+        self.stored = 0
 
     def step(self):
         """ Compute (and returns) the score for the current step, then update
         the city's data to the next step.
         """
-        if self.energies.bought_amounts.sum() < self.needded_energy:
+        if self.stored < self.needded_energy:
             raise NotEnoughEnergy(self.energies.bought_amounts.sum(), self.needded_energy)
         scores = compute_scores(people=self.people, energies=self.energies,
                                 lights=self.lights, heaters=self.heaters)
         self.energies_step()
-        self.lights_step()
-        self.heaters_step()
         return scores
 
     def energies_step(self):
+        assert self.stored >= self.needded_energy
         new_cost = self.energies.new_cost(self.energies.costs)
-        new_amount = self.energies.new_amount(self.energies.amounts)
+        new_amount = self.energies.new_amount(self.energies.amounts, self.energies.bought_amounts)
 
         self.energies.costs = new_cost
-        self.energies.amounts = new_amount - self.energies.bought_amounts
-
-    def lights_step(self):
-        pass
-
-    def heaters_step(self):
-        pass
+        self.energies.amounts = new_amount
 
     def light_up(self, lights_on):
         pass
@@ -52,7 +46,8 @@ class SmartCity:
         pass
 
     def buy_energies(self, amounts):
-        cost = self.energies.buy(amounts)
+        cost, quantity = self.energies.buy(amounts)
+        self.stored += quantity
         return cost
 
 
