@@ -28,15 +28,15 @@ def main():
             ]
         },
         "people": {
-            "nb_people": 500,
+            "nb_people": 10,
             "pollution_pref": {"distribution_name": "uniform", "low": 0., "high": 0.5},
             "nuclear_pref": {"distribution_name": "uniform", "low": 0.2, "high": 1.0},
             "lights_pref": {"distribution_name": "uniform", "low": 0., "high": 0.5},
-            "heat_pref": {"distribution_name": "uniform", "low": 0.2, "high": 1.0},
+            "heat_pref": {"distribution_name": "uniform", "low": 17, "high": 28},
             "interraction": "random"
         },
-        "lights": {"nb_lights": 5_000},
-        "heaters": {"nb_heaters": 800, "mean_temperature": 18, "std_temperature": 1}
+        "lights": {"nb_lights": 5},
+        "heaters": {"nb_heaters": 5, "mean_temperature": 18, "std_temperature": 1}
     }
 
     data = build_all(configs)
@@ -44,12 +44,12 @@ def main():
     smart_city = SmartCity(people=people, energies=energies,
                            lights=lights, heaters=heaters)
     engine = Engine(smart_city)
-    engine.buy_energies(smart_city.energies.amounts / 2)
+    engine.buy_energies(smart_city.energies.amounts)
     engine.step()
-    print(engine.scores, "\n", smart_city.energies)
-    engine.buy_energies(smart_city.energies.amounts / 2)
+    print(engine.scores) #, "\n", smart_city.energies)
+    """engine.buy_energies(smart_city.energies.amounts / 2)
     engine.step()
-    print(engine.scores, "\n", smart_city.energies)
+    print(engine.scores) #, "\n", smart_city.energies)"""
 
 
 if __name__ == '__main__':

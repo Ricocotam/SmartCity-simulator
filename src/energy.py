@@ -1,5 +1,6 @@
 import numpy as np
 
+from . import scores
 
 class Energies:
     def __init__(self, initial_costs, initial_amounts, pollution_factors,
@@ -20,6 +21,7 @@ class Energies:
         assert all(map(lambda e, a: e >= a, self.amounts, amounts))
 
         self.bought_amounts = amounts
+        return scores.spendings(self), amounts.sum()
 
     def to_json(self):
         pass

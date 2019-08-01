@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 from .energy import Energies
 from .people import People
@@ -22,8 +23,8 @@ def build_energies(config):
     amounts = np.array([e["amount"] for e in config["energies"]], dtype=np.float64)
     pollution_factors = np.array([e["pollution_factor"] for e in config["energies"]], dtype=np.float64)
 
-    new_cost = lambda x: x
-    new_amount = lambda x: 1.3 * x
+    new_cost = lambda costs, bought: costs
+    new_amount = lambda amount, bought: amount
 
     return Energies(
         initial_costs=costs,
@@ -33,14 +34,27 @@ def build_energies(config):
         new_amount=new_amount
     )
 
+# TODO : get the max from distribution to normalize
+def uniform_draw(low, high, size):
+    return np.random.uniform(low=low, high=high, size=(size, 2))
 
-distributions = {"uniform": np.random.uniform}
+distributions = {"uniform": uniform_draw,
+                 }
 def draw_from_dist(distribution_name, **kwparameters):
     return distributions[distribution_name](**kwparameters)
 
+def random_β_distribution(α_range, β_range):
+    α, β = np.random.rand(2)
+    α = α * α_range[1] + α_range[0]
+    β = β * β_range[1] + β_range[0]
+    return α, β
+
+
 interractions = {"random": 
-                    lambda peo, ligh, heat: (np.random.choice([0, 1], size=(peo, ligh), p=[.9, .1]),
-                                             np.random.choice([0, 1], size=(peo, heat), p=[.9, .1]))}
+                    lambda peo, ligh, heat: (np.random.choice([0, 1], size=(peo, ligh), p=[0, 1]),
+                                             np.random.choice([0, 1], size=(peo, heat), p=[.0, 1.])),
+                }
+
 def draw_interraction(nb_people, nb_lights, nb_heaters, style="random"):
     return interractions[style](nb_people, nb_lights, nb_heaters)
 
@@ -49,12 +63,13 @@ def build_people(config, nb_lights, nb_heaters):
     nuclear_pref_params = config["nuclear_pref"]
     lights_pref_params = config["lights_pref"]
     heat_pref_params = config["heat_pref"]
+    nb_people = config["nb_people"]
 
-    pollution_pref = draw_from_dist(**pollution_pref_params)
-    nuclear_pref = draw_from_dist(**nuclear_pref_params)
-    lights_pref = draw_from_dist(**lights_pref_params)
-    heat_pref = draw_from_dist(**heat_pref_params)
-    light_inter, heat_inter = draw_interraction(config["nb_people"], nb_lights, nb_heaters, config["interraction"])
+    pollution_pref = draw_from_dist(size=nb_people, **pollution_pref_params)
+    nuclear_pref = draw_from_dist(size=nb_people, **nuclear_pref_params)
+    lights_pref = draw_from_dist(size=nb_people, **lights_pref_params)
+    heat_pref = draw_from_dist(size=nb_people, **heat_pref_params)
+    light_inter, heat_inter = draw_interraction(nb_people, nb_lights, nb_heaters, config["interraction"])
 
     return People(
         pollution_pref=pollution_pref,
@@ -62,7 +77,7 @@ def build_people(config, nb_lights, nb_heaters):
         lights_pref=lights_pref,
         heater_pref=heat_pref,
         lights_interraction=light_inter,
-        heaters_interration=heat_inter
+        heaters_interraction=heat_inter
     )
 
 

@@ -33,7 +33,7 @@ class SmartCity:
 
     def energies_step(self):
         assert self.stored >= self.needded_energy
-        new_cost = self.energies.new_cost(self.energies.costs)
+        new_cost = self.energies.new_cost(self.energies.costs, self.energies.bought_amounts)
         new_amount = self.energies.new_amount(self.energies.amounts, self.energies.bought_amounts)
 
         self.energies.costs = new_cost
