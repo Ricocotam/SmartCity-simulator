@@ -29,10 +29,10 @@ def main():
         },
         "people": {
             "nb_people": 10,
-            "pollution_pref": {"distribution_name": "uniform", "low": 0., "high": 0.5},
-            "nuclear_pref": {"distribution_name": "uniform", "low": 0.2, "high": 1.0},
-            "lights_pref": {"distribution_name": "uniform", "low": 0., "high": 0.5},
-            "heat_pref": {"distribution_name": "uniform", "low": 17, "high": 28},
+            "pollution_pref": {"distribution_name": "mean_var", "low": 0.1, "high": 0.5, "mini": 0, "maxi": 1},
+            "nuclear_pref": {"distribution_name": "mean_var", "low": 0.1, "high": 0.8, "mini": 0, "maxi": 1},
+            "lights_pref": {"distribution_name": "mean_var", "low": 0.1, "high": 0.5, "mini": 0, "maxi": 1},
+            "heat_pref": {"distribution_name": "mean_var", "low": 17, "high": 23, "mini": 12, "maxi": 30},
             "interraction": "random"
         },
         "lights": {"nb_lights": 5},

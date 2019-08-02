@@ -1,3 +1,5 @@
+from .utils import estimate_beta_parameters
+
 class People:
     def __init__(self, pollution_pref, nuclear_pref, lights_pref, heater_pref,
                  lights_interraction, heaters_interraction):

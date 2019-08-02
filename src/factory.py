@@ -3,6 +3,7 @@ import random
 
 from .energy import Energies
 from .people import People
+from .utils import BetaDistributions
 
 def build_all(configs):
     energies = build_energies(configs["energies"])
@@ -35,10 +36,12 @@ def build_energies(config):
     )
 
 # TODO : get the max from distribution to normalize
-def uniform_draw(low, high, size):
-    return np.random.uniform(low=low, high=high, size=(size, 2))
+def mean_var(low, high, size, mini, maxi):
+    means = np.random.uniform(low=low, high=high, size=size)
+    variances = np.random.uniform(low=0.1*means, high=0.3*means, size=size)
+    return BetaDistributions(means, variances, mini, maxi)
 
-distributions = {"uniform": uniform_draw,
+distributions = {"mean_var": mean_var,
                  }
 def draw_from_dist(distribution_name, **kwparameters):
     return distributions[distribution_name](**kwparameters)
@@ -65,9 +68,13 @@ def build_people(config, nb_lights, nb_heaters):
     heat_pref_params = config["heat_pref"]
     nb_people = config["nb_people"]
 
+    print("Pollution")
     pollution_pref = draw_from_dist(size=nb_people, **pollution_pref_params)
+    print("Nuclear")
     nuclear_pref = draw_from_dist(size=nb_people, **nuclear_pref_params)
+    print("Lights")
     lights_pref = draw_from_dist(size=nb_people, **lights_pref_params)
+    print("Heat")
     heat_pref = draw_from_dist(size=nb_people, **heat_pref_params)
     light_inter, heat_inter = draw_interraction(nb_people, nb_lights, nb_heaters, config["interraction"])
 
