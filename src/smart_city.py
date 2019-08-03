@@ -49,7 +49,3 @@ class SmartCity:
         cost, quantity = self.energies.buy(amounts)
         self.stored += quantity
         return cost
-
-
-if __name__ == '__main__':
-    pass

@@ -1,13 +1,14 @@
 import numpy as np
-import random
 
 from .energy import Energies
 from .people import People
 from .utils import BetaDistributions
 
+
 def build_all(configs):
     energies = build_energies(configs["energies"])
-    people = build_people(configs["people"], configs["lights"]["nb_lights"], configs["heaters"]["nb_heaters"])
+    people = build_people(configs["people"], configs["lights"]
+                          ["nb_lights"], configs["heaters"]["nb_heaters"])
     lights = build_lights(configs["lights"])
     heaters = build_heaters(configs["heaters"])
 
@@ -21,11 +22,16 @@ def build_all(configs):
 
 def build_energies(config):
     costs = np.array([e["cost"] for e in config["energies"]], dtype=np.float64)
-    amounts = np.array([e["amount"] for e in config["energies"]], dtype=np.float64)
-    pollution_factors = np.array([e["pollution_factor"] for e in config["energies"]], dtype=np.float64)
+    amounts = np.array([e["amount"]
+                        for e in config["energies"]], dtype=np.float64)
+    pollution_factors = np.array([e["pollution_factor"]
+                                  for e in config["energies"]], dtype=np.float64)
 
-    new_cost = lambda costs, bought: costs
-    new_amount = lambda amount, bought: amount
+    def new_cost(costs, bought):
+        return costs
+
+    def new_amount(amount, bought):
+        return amount
 
     return Energies(
         initial_costs=costs,
@@ -35,16 +41,20 @@ def build_energies(config):
         new_amount=new_amount
     )
 
-# TODO : get the max from distribution to normalize
+
 def mean_var(low, high, size, mini, maxi):
     means = np.random.uniform(low=low, high=high, size=size)
-    variances = np.random.uniform(low=0.1*means, high=0.3*means, size=size)
+    variances = np.random.uniform(low=0.1 * means, high=0.3 * means, size=size)
     return BetaDistributions(means, variances, mini, maxi)
+
 
 distributions = {"mean_var": mean_var,
                  }
+
+
 def draw_from_dist(distribution_name, **kwparameters):
     return distributions[distribution_name](**kwparameters)
+
 
 def random_β_distribution(α_range, β_range):
     α, β = np.random.rand(2)
@@ -53,13 +63,15 @@ def random_β_distribution(α_range, β_range):
     return α, β
 
 
-interractions = {"random": 
-                    lambda peo, ligh, heat: (np.random.choice([0, 1], size=(peo, ligh), p=[0, 1]),
-                                             np.random.choice([0, 1], size=(peo, heat), p=[.0, 1.])),
-                }
+interractions = {"random":
+                 lambda peo, ligh, heat: (np.random.choice([0, 1], size=(peo, ligh), p=[0, 1]),
+                                          np.random.choice([0, 1], size=(peo, heat), p=[.0, 1.])),
+                 }
+
 
 def draw_interraction(nb_people, nb_lights, nb_heaters, style="random"):
     return interractions[style](nb_people, nb_lights, nb_heaters)
+
 
 def build_people(config, nb_lights, nb_heaters):
     pollution_pref_params = config["pollution_pref"]
@@ -76,7 +88,8 @@ def build_people(config, nb_lights, nb_heaters):
     lights_pref = draw_from_dist(size=nb_people, **lights_pref_params)
     print("Heat")
     heat_pref = draw_from_dist(size=nb_people, **heat_pref_params)
-    light_inter, heat_inter = draw_interraction(nb_people, nb_lights, nb_heaters, config["interraction"])
+    light_inter, heat_inter = draw_interraction(
+        nb_people, nb_lights, nb_heaters, config["interraction"])
 
     return People(
         pollution_pref=pollution_pref,
@@ -96,4 +109,3 @@ def build_heaters(config):
     heaters = np.random.randn(config["nb_heaters"])
     heaters = (config["mean_temperature"] + heaters) * config["std_temperature"]
     return heaters
-
