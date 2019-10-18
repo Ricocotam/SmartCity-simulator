@@ -22,7 +22,3 @@ class Engine:
     def step(self):
         step_scores = self.smart_city.step()
         self.scores.append(step_scores)
-
-
-if __name__ == '__main__':
-    pass

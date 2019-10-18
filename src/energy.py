@@ -2,6 +2,7 @@ import numpy as np
 
 from . import scores
 
+
 class Energies:
     def __init__(self, initial_costs, initial_amounts, pollution_factors,
                  new_cost, new_amount):
@@ -25,8 +26,3 @@ class Energies:
 
     def to_json(self):
         pass
-
-
-
-if __name__ == '__main__':
-    pass

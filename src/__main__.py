@@ -7,24 +7,24 @@ def main():
     configs = {
         "energies": {
             "energies": [
-                    {
-                        "name": "Carbon",
-                        "cost": 0.2,
-                        "amount": 100,
-                        "pollution_factor": 1,
-                    },
-                    {
-                        "name": "Nuclear",
-                        "cost": 0.5,
-                        "amount": 40,
-                        "pollution_factor": 0,
-                    },
-                    {
-                        "name": "Renewable",
-                        "cost": 1,
-                        "amount": 10,
-                        "pollution_factor": 0,
-                    }
+                {
+                    "name": "Carbon",
+                    "cost": 0.2,
+                    "amount": 100,
+                    "pollution_factor": 1,
+                },
+                {
+                    "name": "Nuclear",
+                    "cost": 0.5,
+                    "amount": 40,
+                    "pollution_factor": 0,
+                },
+                {
+                    "name": "Renewable",
+                    "cost": 1,
+                    "amount": 10,
+                    "pollution_factor": 0,
+                }
             ]
         },
         "people": {
@@ -46,7 +46,7 @@ def main():
     engine = Engine(smart_city)
     engine.buy_energies(smart_city.energies.amounts)
     engine.step()
-    #print(engine.scores) #, "\n", smart_city.energies)
+    print(engine.scores)  # , "\n", smart_city.energies)
     """engine.buy_energies(smart_city.energies.amounts / 2)
     engine.step()
     print(engine.scores) #, "\n", smart_city.energies)"""

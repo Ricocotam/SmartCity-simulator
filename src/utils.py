@@ -3,12 +3,12 @@ def estimate_beta_parameters(means, stds, low, high):
     loc = low
     scale = high
 
-    #print("\t\t BEFORE", means, stds)
+    # print("\t\t BEFORE", means, stds)
     means = (means - loc) / scale
     variances = (stds / scale) ** 2
-    #print("\t\t AFTER", means, stds / scale)
+    # print("\t\t AFTER", means, stds / scale)
 
-    temp = means*(1 - means) / variances - 1
+    temp = means * (1 - means) / variances - 1
     α = means * temp
     β = (1 - means) * temp
 
@@ -24,9 +24,7 @@ def estimate_beta_parameters(means, stds, low, high):
             vars : {variances}
             loc : {loc}
             scale : {scale}
-    
     """)
-
 
     return α, β, loc, scale
 
@@ -38,6 +36,6 @@ class BetaDistributions(object):
         self.stds = stds
         assert (self.alphas < 0).sum() == 0
         assert (self.betas < 0).sum() == 0
-    
+
     def __iter__(self):
         return iter((self.alphas, self.betas, self.means, self.stds))
