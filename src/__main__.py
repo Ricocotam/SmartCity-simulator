@@ -46,7 +46,7 @@ def main():
     engine = Engine(smart_city)
     engine.buy_energies(smart_city.energies.amounts)
     engine.step()
-    print(engine.scores) #, "\n", smart_city.energies)
+    #print(engine.scores) #, "\n", smart_city.energies)
     """engine.buy_energies(smart_city.energies.amounts / 2)
     engine.step()
     print(engine.scores) #, "\n", smart_city.energies)"""

@@ -54,8 +54,8 @@ def random_β_distribution(α_range, β_range):
 
 
 interractions = {"random": 
-                    lambda peo, ligh, heat: (np.random.choice([0, 1], size=(peo, ligh), p=[0, 1]),
-                                             np.random.choice([0, 1], size=(peo, heat), p=[.0, 1.])),
+                    lambda peo, ligh, heat: (np.random.choice([0, 1], size=(peo, ligh), p=[0.8, 0.2]),
+                                             np.random.choice([0, 1], size=(peo, heat), p=[0.9, 0.1])),
                 }
 
 def draw_interraction(nb_people, nb_lights, nb_heaters, style="random"):
