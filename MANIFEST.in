@@ -1,0 +1,3 @@
+include smartcity/data/small.json
+include smartcity/data/medium.json
+include smartcity/data/big.json

@@ -1,0 +1,34 @@
+{
+    "energies": {
+        "energies": [
+            {
+                "name": "Carbon",
+                "cost": 0.2,
+                "amount": 1000,
+                "pollution_factor": 1
+            },
+            {
+                "name": "Nuclear",
+                "cost": 0.5,
+                "amount": 2000,
+                "pollution_factor": 0
+            },
+            {
+                "name": "Renewable",
+                "cost": 1,
+                "amount": 300,
+                "pollution_factor": 0
+            }
+        ]
+    },
+    "people": {
+        "nb_people": 100,
+        "pollution_pref": {"distribution_name": "mean_var", "low": 0.1, "high": 0.5, "mini": 0, "maxi": 1},
+        "nuclear_pref": {"distribution_name": "mean_var", "low": 0.1, "high": 0.8, "mini": 0, "maxi": 1},
+        "lights_pref": {"distribution_name": "mean_var", "low": 0.1, "high": 0.5, "mini": 0, "maxi": 1},
+        "heat_pref": {"distribution_name": "mean_var", "low": 17, "high": 23, "mini": 12, "maxi": 30},
+        "interraction": "random"
+    },
+    "lights": {"nb_lights": 5000},
+    "heaters": {"nb_heaters": 150, "mean_temperature": 18, "std_temperature": 1}
+}
