@@ -3,8 +3,10 @@ Smart City Simulator designed for hackathons !
 
 ## Package installation
 `pip3 install --user smartcity`
+On Google Colab
+`!pip3 install smartcity`
 
-Python > 3.7
+Python > 3.6
 
 ## Env Instantiation
 In the package, 3 envs are available :
@@ -25,6 +27,9 @@ obs, info = env.reset()
 ## Actions
 To send action, you have to send a dictionnary instead of the usual vectors. There's 3 keys to send : energies, heaters and lights. Energies defines how much of each type of energy you buy. Lights define whether each light is on or off (a threshold at 0.5 is set). Heaters define the temperature of each heater. To have the size and the type of each parameter, they are available in the `obs` variable. `obs` is a dictionnary you can use to predict your actions. Keys `lights`, `heaters` and `energies_amount` have the exact format requested for actions, you can just copy them.
 
+### Energies
+Energies are ordered the same way for all the arrays
+
 ## Observations and informations
 There's 5 keys in the obs dictionnary :
 
@@ -38,6 +43,7 @@ There's 2 keys in `info` dictionnary :
 
 - `light_interraction` : a matrix of shape (#people, #lights). If there's a 1 at `[i, j]`, the citizen `i` is connected to light `light`
 - `heaters_interraction` : same as lights but for heaters
+- `energy_pollution` : pollution factor for each type of enegy (carbon, nuclear, renewable)
 
 ## Example
 
