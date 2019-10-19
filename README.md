@@ -1,6 +1,10 @@
 # SmartCity-simulator
 Smart City Simulator designed for hackathons !
 
+## Package installation
+`pip3 install --user smartcity`
+
+Python > 3.7
 
 ## Env Instantiation
 In the package, 3 envs are available :
