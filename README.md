@@ -38,3 +38,24 @@ There's 2 keys in `info` dictionnary :
 
 - `light_interraction` : a matrix of shape (#people, #lights). If there's a 1 at `[i, j]`, the citizen `i` is connected to light `light`
 - `heaters_interraction` : same as lights but for heaters
+
+## Example
+
+```python
+import smartcity
+import gym
+import random
+
+env = gym.make("SmartCity-v0")
+
+obs, info = env.reset()
+
+energies = [0.8*obs["needed_energy"], 0.15*obs["needed_energy"], 0.1*obs["needed_energy"]]
+
+lights = np.array([random.random() for _ in range(obs["lights"].shape[0])])
+heaters = obs["heaters"] + 2
+
+actions = {"energies": energies, "heaters": heaters, "lights": lights}
+
+obs, score, done, info = env.step(actions)
+```
