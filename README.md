@@ -74,8 +74,7 @@ import smartcity
 import gym
 
 seed = # given seed
-env = gym.make("SmartCity-v0")
-env.change_settings("path/to/setting.json")
+env = gym.make("SmartCity-v1337")
 env.seed(seed)
 
 obs, info = env.reset()
