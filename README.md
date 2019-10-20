@@ -92,3 +92,6 @@ with open("groupe_name.sub", "w") as f:
         obs, score, done, info = env.step(actions)
         f.write(f"{actions}\n")
 ```
+
+
+SEED = 1337
