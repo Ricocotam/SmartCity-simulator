@@ -99,7 +99,7 @@ Pour ceux qui sont dans colab, copiez collez le contenu du fichier json dans une
 import json
 content = # copy paste subission.json
 with open("submission.json", "w") as f:
-    json.dump(content)
+    json.dump(content, f)
 
 import smartcity
 import gym
