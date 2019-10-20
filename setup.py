@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="smartcity",
-    version="1.0.0",
+    version="1.0.15",
     author="Adrien Pouyet (Ricocotam)",
     author_email="ricocotam@gmail.Com",
     description="A Smart City Env designed for Reinforcement Learning",
@@ -18,6 +18,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.6',
     include_package_data=True
 )

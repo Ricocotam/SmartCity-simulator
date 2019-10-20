@@ -65,3 +65,30 @@ actions = {"energies": energies, "heaters": heaters, "lights": lights}
 
 obs, score, done, info = env.step(actions)
 ```
+
+## Evaluation
+We'll give you a seed and a json file dubbed `setting.json` and a seed.
+
+```py
+import smartcity
+import gym
+
+seed = # given seed
+env = gym.make("SmartCity-v0")
+env.change_settings("path/to/setting.json")
+env.seed(seed)
+
+obs, info = env.reset()
+# Learning
+# your code here
+
+# Evaluation
+env.seed(seed)
+obs, info = env.reset()
+
+with open("groupe_name.sub", "w") as f:
+    for i in range(100):
+        actions = # prediction de votre modèle
+        obs, score, done, info = env.step(actions)
+        f.write(f"{actions}\n")
+```

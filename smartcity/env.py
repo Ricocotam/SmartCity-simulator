@@ -1,7 +1,7 @@
 import os
 import random
 
-import numpy
+import numpy as np
 import gym
 
 from .factory import load_from_json
@@ -22,7 +22,9 @@ class SmartCityEnv(gym.Env):
         self.__initialize_env(setting_file_path)
 
     def step(self, actions):
-        energies, heaters, lights = [actions[k] for k in ["energies", "heaters", "lights"]]
+        energies, heaters, lights = [np.array(actions[k]) for k in ["energies", "heaters", "lights"]]
+        energies[energies < 0] = 0
+        heaters[heaters < 0] = 0
         self.engine.buy_energies(energies)
         self.engine.light_up(lights)
         self.engine.heat_up(heaters)
@@ -31,7 +33,7 @@ class SmartCityEnv(gym.Env):
         return observation, scores, False, info
 
     def seed(self, seed):
-        numpy.random.seed(seed)
+        np.random.seed(seed)
         random.seed(seed)
 
     def reset(self):

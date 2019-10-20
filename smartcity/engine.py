@@ -11,6 +11,7 @@ class Engine:
         pass
 
     def light_up(self, lights):
+        lights = lights > .5
         self.smart_city.light_up(lights)
 
     def heat_up(self, heaters):
@@ -31,7 +32,8 @@ class Engine:
     def get_info(self):
         return {
             "light_interraction": self.smart_city.people.lights_interraction,
-            "heaters_interraction": self.smart_city.people.heaters_interraction
+            "heaters_interraction": self.smart_city.people.heaters_interraction,
+            "energy_pollution": self.smart_city.energies.pollution_factors
         }
 
     def step(self):

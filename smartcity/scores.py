@@ -59,6 +59,7 @@ def satisfaction(people, lights, heaters, pollution_score, nuclear):
     heat_score = compute_score(heaters_inter, *people.heater_pref)
 
     #print("Scores", pollution_score, nuclear_score, light_score, heat_score)
+    #print("prefs", *people.heater_pref)
 
     return pollution_score + nuclear_score + light_score + heat_score
 
